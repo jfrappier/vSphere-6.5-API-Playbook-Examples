@@ -1,0 +1,26 @@
+---
+- hosts: localhost
+  become: no
+
+  tasks:
+    - name: vcenter login
+      uri:
+        url: https://cloudvc.student.lab/rest/com/vmware/cis/session
+        force_basic_auth: yes
+        method: POST
+        user: administrator@vsphere.local
+        password: P@ssw0rd
+        status_code: 200
+        validate_certs: no
+      register: login
+
+    - name: set dns servers
+      uri:
+        url: https://cloudvc.student.lab/rest/appliance/networking/dns/servers
+        force_basic_auth: yes
+        method: PUT
+        body_format: json
+        body: "{{ lookup('file','dnsservers.json') }}"
+        validate_certs: no
+        headers:
+          Cookie: "{{login.set_cookie}}" 

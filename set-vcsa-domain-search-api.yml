@@ -14,13 +14,13 @@
         validate_certs: no
       register: login
 
-    - name: disable ssh
+    - name: set domain search
       uri:
-        url: https://cloudvc.student.lab/rest/appliance/access/ssh
+        url: https://cloudvc.student.lab/rest/appliance/networking/dns/domains
         force_basic_auth: yes
-        method: PUT
+        method: POST
         body_format: json
-        body: "{{ lookup('file','sshoff.json') }}"
+        body: "{{ lookup('file','domains.json') }}"
         validate_certs: no
         headers:
           Cookie: "{{login.set_cookie}}" 

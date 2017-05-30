@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  become: no
+
+  tasks:
+    - name: vcenter login
+      uri:
+        url: https://cloudvc.student.lab/rest/com/vmware/cis/session
+        force_basic_auth: yes
+        method: POST
+        user: administrator@vsphere.local
+        password: P@ssw0rd
+        status_code: 200
+        validate_certs: no
+      register: login
+
+    - name: get vcsa time
+      uri:
+        url: https://cloudvc.student.lab/rest/appliance/system/time
+        force_basic_auth: yes
+        method: GET
+        return_content: yes
+        validate_certs: no
+        headers:
+          Cookie: "{{login.set_cookie}}"

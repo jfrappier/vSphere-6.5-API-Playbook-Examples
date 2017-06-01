@@ -1,0 +1,8 @@
+{
+  "piece": {
+    "location_user": "ansible",
+    "location_password": "P@ssw0rd",
+    "location": "192.168.1.77:/home/ansible/backups",
+    "location_type": "SCP"
+  }
+}

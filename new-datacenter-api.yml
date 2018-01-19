@@ -9,11 +9,11 @@
         force_basic_auth: yes
         method: POST
         user: yourusername@fqdn.foo
-        password: '{{ pass }}'
+        password: '{{ passvc }}'
         status_code: 200
         validate_certs: no
       vars:
-        pass: !vault |
+        passvc: !vault |
          $ANSIBLE_VAULT;1.1;AES256
          66303936363465353562613363333436633835356663653736346635623065393134653636613231
          6534363633653836346236548694654655313861333131630a386630393636376436326261623564

@@ -5,10 +5,10 @@
   tasks:
     - name: vcenter login
       uri:
-        url: https://vcsa01.corp.local/rest/com/vmware/cis/session
+        url: https://yourvc.fqdn.foo/rest/com/vmware/cis/session
         force_basic_auth: yes
         method: POST
-        user: administrator@vsphere.local 
+        user: yourusername@fqdn.foo
         password: '{{ pass }}'
         status_code: 200
         validate_certs: no
@@ -16,15 +16,15 @@
         pass: !vault |
          $ANSIBLE_VAULT;1.1;AES256
          66303936363465353562613363333436633835356663653736346635623065393134653636613231
-         6534363633653836346239343766626165313861333131630a386630393636376436326261623564
-         65616637316535356136316264623365386566303663313664663530656136636365633034343865
+         6534363633653836346236548694654655313861333131630a386630393636376436326261623564
          3138633833613466350a613365386333623165333232313139396134633430393164326136363536
+         65616637316535356136316264623365386566303663313664663530656136636365633034343865
          3962
        register: login
 
     - name: create data center 
       uri:
-        url: https://vcsa01.corp.local/rest/vcenter/datacenter
+        url: https://yourvc.fqdn.foo/rest/vcenter/datacenter
         force_basic_auth: yes
         method: POST
         body_format: json
